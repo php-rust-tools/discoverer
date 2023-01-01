@@ -1,5 +1,6 @@
 [package]
 name = "discoverer"
+description = "Recursively search directories for a particular type of file."
 version = "0.0.0"
 edition = "2021"
 license = "MIT"
