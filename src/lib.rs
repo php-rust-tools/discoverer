@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 use walkdir::{WalkDir, Error};
 
-pub fn discover(extension: &str, within: &[&str]) -> Result<Vec<PathBuf>, Error> {
+pub fn discover(extensions: &[&str], within: &[&str]) -> Result<Vec<PathBuf>, Error> {
     let mut paths = Vec::new();
 
     for directory in within {
@@ -17,7 +17,7 @@ pub fn discover(extension: &str, within: &[&str]) -> Result<Vec<PathBuf>, Error>
 
             if path.is_file() {
                 if let Some(ext) = path.extension() {
-                    if ext == extension {
+                    if extensions.contains(&ext.to_str().unwrap()) {
                         paths.push(path.to_path_buf());
                     }
                 }
@@ -34,7 +34,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let paths = super::discover("rs", &["src"]).unwrap();
+        let paths = super::discover(&["rs"], &["src"]).unwrap();
 
         assert_eq!(paths.len(), 1);
         assert_eq!(paths.first(), Some(&PathBuf::from("src/lib.rs")));
