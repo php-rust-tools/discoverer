@@ -8,7 +8,7 @@ Add `discoverer` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-discoverer = "0.1.0"
+discoverer = "0.2.0"
 ```
 
 Or use `cargo add discoverer`
